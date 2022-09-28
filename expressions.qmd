@@ -1,0 +1,130 @@
+# Goal: extract a list of numbers from data with a customized format
+
+## Original data
+
+```{r}
+
+orig <- c('1 2 3 4A7 9 10A12 13 201')
+
+```
+## David's insight is that the colon operator will generate a sequence of
+## numbers, as:
+
+```{r}
+
+42:52
+
+```
+
+## Hence, as a first step, replace the 'A' with a colon, ':'
+
+```{r}
+
+modified <- gsub('A', ':', orig)
+print(modified)
+
+
+```
+
+("tidy" enthusiasts will prefer another way to accomplish this step)
+
+
+## We need to be able to extract the numbers separately from each term
+## Hence, "pretend" that R is reading the data, one piece at a time.
+
+### Note: If we had the original data file, we'd read from that file.
+
+### The 'scan` function in base R can read from a text string
+
+```{r}
+
+scanned <- scan(text = modified, what = "character")
+typeof(scanned)
+print(scanned)
+
+```
+
+The `what` parameter specifies the type of the data to be read.  Specifying
+either a null string or explicitly specifying "character" prevents R from
+"complaining" about the embedded colon.
+
+## The next step: parsing
+
+In `scanned` we now have a list of the separate strings that were in the
+original.  Were it not for the embedded colon, we could simply do:
+
+`as.numeric(scanned)`
+
+What we do instead is to use the `parse` function to convert the items into a
+form that R is *able* to evaluate, but leaving the items temporarily
+unevaluated.
+
+### Slight digression (which actually explains most of the idea)
+
+Note that this parse/evaluate sequence appears to happen automatically in
+"everyday" use of the R interpreter, as:
+
+```{r}
+
+x <- 42 + (314 / 2)
+print(x)
+
+```
+
+Compare this to:
+
+```{r}
+
+input_string <- '42 + (314 / 2)'
+input_parsed <- parse(text = input_string)
+print(typeof(input_parsed))
+eval(input_parsed)
+
+```
+
+### Back to the original task
+
+With `parsed` we've got all the terms right where we want them.  There remains
+the task of bringing the evaluation part of the R interpreter to bear on each
+of the individual terms.
+
+The typical way to get R to act on a sequence is to use one of the `apply`
+family of functions.  In this case we (i.e., David)  choose to use `sapply`
+(or sap-lee as the cool kids call it).
+
+### Simple example of using `sapply`
+
+```{r}
+
+x <- c(1, 4, 9, 16, 25)
+print(sapply(x, sqrt))
+
+```
+
+Note that a `for` loop would work just as well for this, and would not be
+nearly as terrible an idea as some would lead you to believe.
+
+### OK, now *really* back to the original task
+
+```{r}
+
+parsed <- parse(text = scanned)
+
+final_result <- sapply(parsed, eval)
+print(final_result)
+
+
+```
+
+Now we have the numbers that we want, but they're in the form of a list, which
+is not particularly convenient for this task, so convert to a vector:
+
+```{r}
+
+final_result <- unlist(final_result)
+print(final_result)
+
+```
+
+And that (finally) leads us back to David's result.
+
