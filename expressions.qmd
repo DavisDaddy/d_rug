@@ -1,12 +1,17 @@
 # Goal: extract a list of numbers from data with a customized format
 
-## Original data
+## Based on a solution submitted by David Winsemius to a problem posed on the UC Davis D-RUG mailing list
+
+## Original data.  The 'A' indicates that the surrounding digits define a range
 
 ```{r}
 
 orig <- c('1 2 3 4A7 9 10A12 13 201')
 
 ```
+
+## Goal: replace the 'A' terms with their literal meaning, as: 10A12 --> 10, 11, 12
+
 ## David's insight is that the colon operator will generate a sequence of
 ## numbers, as:
 

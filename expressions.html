@@ -105,11 +105,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="goal-extract-a-list-of-numbers-from-data-with-a-customized-format" class="level1">
 <h1>Goal: extract a list of numbers from data with a customized format</h1>
-<section id="original-data" class="level2">
-<h2 class="anchored" data-anchor-id="original-data">Original data</h2>
+<section id="based-on-a-solution-submitted-by-david-winsemius-to-a-problem-posed-on-the-uc-davis-d-rug-mailing-list" class="level2">
+<h2 class="anchored" data-anchor-id="based-on-a-solution-submitted-by-david-winsemius-to-a-problem-posed-on-the-uc-davis-d-rug-mailing-list">Based on a solution submitted by David Winsemius to a problem posed on the UC Davis D-RUG mailing list</h2>
+</section>
+<section id="original-data.-the-a-indicates-that-the-surrounding-digits-define-a-range" class="level2">
+<h2 class="anchored" data-anchor-id="original-data.-the-a-indicates-that-the-surrounding-digits-define-a-range">Original data. The ‘A’ indicates that the surrounding digits define a range</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>orig <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'1 2 3 4A7 9 10A12 13 201'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="goal-replace-the-a-terms-with-their-literal-meaning-as-10a12-10-11-12" class="level2">
+<h2 class="anchored" data-anchor-id="goal-replace-the-a-terms-with-their-literal-meaning-as-10a12-10-11-12">Goal: replace the ‘A’ terms with their literal meaning, as: 10A12 –&gt; 10, 11, 12</h2>
 </section>
 <section id="davids-insight-is-that-the-colon-operator-will-generate-a-sequence-of" class="level2">
 <h2 class="anchored" data-anchor-id="davids-insight-is-that-the-colon-operator-will-generate-a-sequence-of">David’s insight is that the colon operator will generate a sequence of</h2>
